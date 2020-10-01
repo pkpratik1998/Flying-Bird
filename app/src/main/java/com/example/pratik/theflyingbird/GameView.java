@@ -11,7 +11,7 @@ import android.graphics.Typeface;
 import android.view.MotionEvent;
 import android.view.View;
 
-
+import static com.example.pratik.theflyingbird.SkinActivity.birdNo;
 
 public class GameView extends View {
 
@@ -81,8 +81,21 @@ public class GameView extends View {
     public GameView(Context context) {
         super(context);
 
-        bird[0] = BitmapFactory.decodeResource(getResources(), R.drawable.bird1);
-        bird[1] = BitmapFactory.decodeResource(getResources(), R.drawable.bird2);
+        if(birdNo == 1){
+            bird[0] = BitmapFactory.decodeResource(getResources(), R.drawable.bird1);
+            bird[1] = BitmapFactory.decodeResource(getResources(), R.drawable.bird2);
+        }
+        if(birdNo == 2){
+            bird[0] = BitmapFactory.decodeResource(getResources(), R.drawable.frame1);
+            bird[1] = BitmapFactory.decodeResource(getResources(), R.drawable.frame2);
+        }
+        else {
+            bird[0] = BitmapFactory.decodeResource(getResources(), R.drawable.bird1);
+            bird[1] = BitmapFactory.decodeResource(getResources(), R.drawable.bird2);
+        }
+
+
+
 
         bgImage = BitmapFactory.decodeResource(getResources(), R.drawable.bg);
         startImage= BitmapFactory.decodeResource(getResources(),R.drawable.start);
@@ -128,8 +141,8 @@ public class GameView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
 
-        canvasWidth = canvas.getWidth();
-        canvasHeight = canvas.getHeight();
+        canvasWidth = getWidth();
+        canvasHeight = getHeight();
         canvas.drawBitmap(startImage, 0, 0, null);
         canvas.drawBitmap(startButton, 50, 50, null);
 
@@ -387,8 +400,7 @@ public class GameView extends View {
 
 
     public boolean hitCheck ( int x, int y){
-            if (birdX < x && x < (birdX + bird[0].getWidth()) &&
-                    birdY < y && y < (birdY + bird[0].getHeight())) {
+            if (birdX < x && x < (birdX + bird[0].getWidth()) && birdY < y && y < (birdY + bird[0].getHeight())) {
                 return true;
             }
             return false;
